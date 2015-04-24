@@ -1,0 +1,35 @@
+TYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Load GeoJSON</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.js'></script>
+ <script src='abimael.geojson'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<script>
+for (var i = 0; i < hotel.features.length; i++) {
+    hotel.features[i].properties["marker-color"]="#0F8A3C";
+    hotel.features[i].properties["title"]=hotel.features[i].properties.name;
+    hotel.features[i].properties["marker-symbol"]="lodging";
+    hotel.features[i].properties["description"] = '<img width="200px" src="http://www.turismoinnova.es/wp-content/uploads/2012/03/hotel-mandarin-oriental.jpg"></img>';
+   
+   hotel.features[i].properties["description"] = '<img width="200px" src="'+hotel.features[i].properties.image +'"></img>'; 
+    };
+
+
+L.mapbox.accessToken = 'pk.eyJ1IjoiYWJlbDgwMSIsImEiOiIxUzNmOENNIn0.u7fHYs3R9cES0Bmo-CUOdQ';
+L.mapbox.map('map', 'examples.map-i86nkdio')
+  .setView([-13.16, -74.22], 15)
+  .featureLayer.setGeoJSON(hotel);
+</script>
+</body>
+</html>
+
